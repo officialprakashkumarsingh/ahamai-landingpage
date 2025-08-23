@@ -89,13 +89,13 @@ function showNotification(message, type = 'success') {
 // Download Button Handler
 document.getElementById('downloadBtn').addEventListener('click', (e) => {
     e.preventDefault();
-    showNotification('🚀 App launching soon! Get ready for the AI revolution.');
+    showNotification('🚀 अहम्AI launching soon! 100% Free Forever - No hidden costs!');
 });
 
 // CTA Button Handler
 document.getElementById('ctaBtn').addEventListener('click', (e) => {
     e.preventDefault();
-    showNotification('✨ You\'re on the early access list! We\'ll notify you at launch.');
+    showNotification('✨ You\'re on the early access list! Get ready for the FREE AI revolution!');
 });
 
 // Intersection Observer for Animations
@@ -271,6 +271,8 @@ style.textContent = `
             opacity: 0;
         }
     }
+    
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap');
 `;
 document.head.appendChild(style);
 
