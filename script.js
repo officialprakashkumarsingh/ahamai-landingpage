@@ -1,34 +1,7 @@
-// Theme Toggle
-const themeToggle = document.getElementById('themeToggle');
-const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-// Check for saved theme preference or default to system preference
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme) {
-    document.body.classList.toggle('dark', currentTheme === 'dark');
-    document.body.classList.toggle('light', currentTheme === 'light');
-}
-
-themeToggle.addEventListener('click', () => {
-    const isDark = document.body.classList.contains('dark');
-    
-    if (isDark) {
-        document.body.classList.remove('dark');
-        document.body.classList.add('light');
-        localStorage.setItem('theme', 'light');
-    } else if (document.body.classList.contains('light')) {
-        document.body.classList.remove('light');
-        localStorage.removeItem('theme');
-    } else {
-        document.body.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-    }
-});
-
 // Countdown Timer
 function updateCountdown() {
     const launchDate = new Date();
-    launchDate.setHours(launchDate.getHours() + 12); // Launch in 12 hours from now
+    launchDate.setHours(launchDate.getHours() + 8); // Launch in 8 hours
     
     const now = new Date();
     const diff = launchDate - now;
@@ -42,7 +15,7 @@ function updateCountdown() {
         document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
         document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
     } else {
-        document.getElementById('countdown').innerHTML = '<span class="timer-value">Available Now!</span>';
+        document.getElementById('countdown').innerHTML = '<span class="countdown-value">🎉 Available Now!</span>';
     }
 }
 
@@ -50,35 +23,34 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Mobile Preview Demo Rotation
-const demos = ['demo-chat', 'demo-image', 'demo-presentation', 'demo-themes'];
-let currentDemoIndex = 0;
+// Demo Cards Interaction
+const demoCards = document.querySelectorAll('.demo-card');
+let currentActiveDemo = 0;
 
-function showDemo(demoId) {
-    document.querySelectorAll('.demo-content').forEach(demo => {
-        demo.classList.remove('active');
+function activateDemo(index) {
+    demoCards.forEach((card, i) => {
+        card.classList.toggle('active', i === index);
     });
-    document.getElementById(demoId).classList.add('active');
 }
 
-function rotateDemo() {
-    currentDemoIndex = (currentDemoIndex + 1) % demos.length;
-    showDemo(demos[currentDemoIndex]);
+// Auto-rotate demos
+function rotateDemos() {
+    currentActiveDemo = (currentActiveDemo + 1) % demoCards.length;
+    activateDemo(currentActiveDemo);
 }
 
-// Auto-rotate demos every 4 seconds
-let demoInterval = setInterval(rotateDemo, 4000);
+let demoInterval = setInterval(rotateDemos, 3000);
 
-// Feature cards click to show demo
-document.querySelectorAll('.feature-card[data-demo]').forEach(card => {
+// Click to activate specific demo
+demoCards.forEach((card, index) => {
     card.addEventListener('click', () => {
-        const demoId = card.getAttribute('data-demo');
-        showDemo(demoId);
-        // Reset auto-rotation
         clearInterval(demoInterval);
-        demoInterval = setInterval(rotateDemo, 4000);
-        // Update current index
-        currentDemoIndex = demos.indexOf(demoId);
+        activateDemo(index);
+        currentActiveDemo = index;
+        // Restart auto-rotation after 10 seconds
+        setTimeout(() => {
+            demoInterval = setInterval(rotateDemos, 3000);
+        }, 10000);
     });
 });
 
@@ -88,156 +60,130 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            const offset = 80; // Navbar height
+            const targetPosition = target.offsetTop - offset;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
         }
     });
 });
 
-// Showcase Tabs
-document.querySelectorAll('.tab-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        const tabName = button.getAttribute('data-tab');
-        
-        // Remove active class from all tabs and contents
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-        
-        // Add active class to clicked tab and corresponding content
-        button.classList.add('active');
-        document.getElementById(tabName).classList.add('active');
-    });
-});
-
-// Download Button Handler
-document.getElementById('downloadBtn').addEventListener('click', (e) => {
-    e.preventDefault();
-    // You can replace this with actual download link when app is ready
-    showNotification('App launching soon! Get ready for the ultimate AI experience.');
-});
-
-document.getElementById('ctaDownload').addEventListener('click', (e) => {
-    e.preventDefault();
-    showNotification('Join the waitlist! We\'ll notify you as soon as AhamAI launches.');
-});
-
 // Notification System
-function showNotification(message) {
+function showNotification(message, type = 'success') {
+    const container = document.getElementById('notification-container');
     const notification = document.createElement('div');
     notification.className = 'notification';
     notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: hsl(var(--primary));
-        color: hsl(var(--primary-foreground));
-        padding: 1rem 1.5rem;
-        border-radius: var(--radius);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        z-index: 10000;
-        animation: slideInRight 0.3s ease;
-        max-width: 300px;
-    `;
     
-    document.body.appendChild(notification);
+    container.appendChild(notification);
     
+    // Auto remove after 3 seconds
     setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.3s ease';
+        notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
-// Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideOutRight {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// Parallax Effect on Hero Section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallax = document.querySelector('.hero');
-    const speed = 0.5;
-    
-    if (parallax) {
-        parallax.style.transform = `translateY(${scrolled * speed}px)`;
-    }
+// Download Button Handler
+document.getElementById('downloadBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    showNotification('🚀 App launching soon! Get ready for the AI revolution.');
 });
 
-// Animate on Scroll
+// CTA Button Handler
+document.getElementById('ctaBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    showNotification('✨ You\'re on the early access list! We\'ll notify you at launch.');
+});
+
+// Intersection Observer for Animations
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+            entry.target.style.opacity = '0';
+            entry.target.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                entry.target.style.transition = 'all 0.6s ease';
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, 100);
+            
             observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observe feature cards and model cards
-document.querySelectorAll('.feature-card, .model-card').forEach(card => {
-    card.style.opacity = '0';
+// Observe feature cards
+document.querySelectorAll('.feature-card').forEach(card => {
     observer.observe(card);
 });
 
-// Add fadeInUp animation
-const fadeInUpStyle = document.createElement('style');
-fadeInUpStyle.textContent = `
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-`;
-document.head.appendChild(fadeInUpStyle);
+// Navbar Hide/Show on Scroll
+let lastScroll = 0;
+const navbar = document.querySelector('.navbar');
 
-// Interactive hover effects for model cards
-document.querySelectorAll('.model-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-5px) scale(1.05)';
-    });
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
     
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
+    if (currentScroll > lastScroll && currentScroll > 100) {
+        // Scrolling down
+        navbar.style.transform = 'translateY(-100%)';
+    } else {
+        // Scrolling up
+        navbar.style.transform = 'translateY(0)';
+    }
+    
+    // Add shadow when scrolled
+    if (currentScroll > 50) {
+        navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+    } else {
+        navbar.style.boxShadow = 'none';
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Animate Stats on View
+const stats = document.querySelectorAll('.stat-number');
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const target = entry.target;
+            const value = target.textContent;
+            
+            if (value !== '∞' && !value.includes('x')) {
+                const num = parseInt(value);
+                let current = 0;
+                const increment = num / 30;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= num) {
+                        target.textContent = value;
+                        clearInterval(timer);
+                    } else {
+                        target.textContent = Math.floor(current) + '+';
+                    }
+                }, 50);
+            }
+            
+            statsObserver.unobserve(target);
+        }
     });
 });
 
-// Typing animation for chat messages
-function typeMessage(element, text, speed = 30) {
+stats.forEach(stat => statsObserver.observe(stat));
+
+// Typing Effect for Demo Messages
+function typeText(element, text, speed = 30) {
     let index = 0;
     element.textContent = '';
     
@@ -252,99 +198,92 @@ function typeMessage(element, text, speed = 30) {
     type();
 }
 
-// Animate chat messages when demo is shown
-let chatAnimated = false;
-const chatObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-        if (mutation.target.classList.contains('active') && mutation.target.id === 'demo-chat' && !chatAnimated) {
-            chatAnimated = true;
-            const messages = document.querySelectorAll('#demo-chat .message.ai p');
+// Apply typing effect to AI messages when they become visible
+const messageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const messages = entry.target.querySelectorAll('.ai-message p');
             messages.forEach((msg, index) => {
                 setTimeout(() => {
-                    const originalText = msg.textContent;
-                    typeMessage(msg, originalText, 20);
-                }, index * 800);
+                    const text = msg.textContent;
+                    typeText(msg, text, 20);
+                }, index * 500);
             });
+            messageObserver.unobserve(entry.target);
         }
     });
 });
 
-document.querySelectorAll('.demo-content').forEach(demo => {
-    chatObserver.observe(demo, { attributes: true, attributeFilter: ['class'] });
-});
-
-// Theme Cards Interactive Effects
-document.querySelectorAll('.theme-card').forEach(card => {
-    card.addEventListener('click', function() {
-        // Visual feedback
-        this.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            this.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 150);
-        }, 100);
-        
-        showNotification(`${this.textContent} theme will be available in the app!`);
-    });
-});
-
-// Chart animation
-function animateChart() {
-    const bars = document.querySelectorAll('.chart-preview .bar');
-    bars.forEach((bar, index) => {
-        const height = bar.style.height;
-        bar.style.height = '0';
-        setTimeout(() => {
-            bar.style.height = height;
-        }, index * 100);
-    });
+const chatDemo = document.querySelector('.chat-demo');
+if (chatDemo) {
+    messageObserver.observe(chatDemo);
 }
 
-// Trigger chart animation when generation tab is shown
-document.querySelector('[data-tab="generation"]').addEventListener('click', animateChart);
-
-// Loading animation for image placeholders
-setInterval(() => {
-    document.querySelectorAll('.image-loading').forEach(loader => {
-        loader.style.animationDuration = Math.random() * 2 + 1 + 's';
+// Chart Animation
+const chartBars = document.querySelectorAll('.chart-bars');
+const chartObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const bars = entry.target.querySelectorAll('.bar');
+            bars.forEach((bar, index) => {
+                setTimeout(() => {
+                    bar.style.animation = 'none';
+                    setTimeout(() => {
+                        bar.style.animation = 'growBar 1s ease-out';
+                    }, 10);
+                }, index * 100);
+            });
+            chartObserver.unobserve(entry.target);
+        }
     });
-}, 2000);
-
-// Navbar scroll effect
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > lastScroll && currentScroll > 100) {
-        navbar.style.transform = 'translateY(-100%)';
-    } else {
-        navbar.style.transform = 'translateY(0)';
-    }
-    
-    if (currentScroll > 50) {
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.boxShadow = 'none';
-    }
-    
-    lastScroll = currentScroll;
 });
 
-// Initialize
+chartBars.forEach(chart => chartObserver.observe(chart));
+
+// Speed Comparison Animation
+const speedComparison = document.querySelector('.speed-comparison');
+if (speedComparison) {
+    const speedObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bars = entry.target.querySelectorAll('.comparison-bar::after');
+                // Trigger reflow to restart animations
+                entry.target.style.display = 'none';
+                entry.target.offsetHeight; // Trigger reflow
+                entry.target.style.display = '';
+                speedObserver.unobserve(entry.target);
+            }
+        });
+    });
+    speedObserver.observe(speedComparison);
+}
+
+// Add slide out animation style
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
-    // Show first demo
-    showDemo('demo-chat');
+    // Set initial active demo
+    activateDemo(0);
     
-    // Start countdown
-    updateCountdown();
-    
-    // Add loading complete class
+    // Start animations
     document.body.classList.add('loaded');
 });
 
-// Performance optimization - Debounce scroll events
+// Performance optimization - Debounce scroll
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -359,11 +298,7 @@ function debounce(func, wait) {
 
 // Apply debounce to scroll events
 const debouncedScroll = debounce(() => {
-    const scrolled = window.pageYOffset;
-    const parallax = document.querySelector('.hero');
-    if (parallax) {
-        parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
+    // Any additional scroll-based logic here
 }, 10);
 
 window.addEventListener('scroll', debouncedScroll, { passive: true });
