@@ -1,9 +1,9 @@
 {
-  "latest_version": "1.5.0",
-  "download_url": "https://github.com/officialprakashkumarsingh/ahamai-landingpage/blob/main/releases/download/hhhhh.apk",
-  "force_update": false,
+  "latest_version": "1.6.0",
+  "download_url": "https://github.com/officialprakashkumarsingh/o/releases/download/release/ieiei.apk",
+  "force_update": true,
   "release_date": "2024-01-15",
-  "file_size_mb": 30,
+  "file_size_mb": 15,
   "improvements": [
     "Added file upload support for PDF, ZIP, and 30+ text formats",
     "Improved image analysis with streaming responses",
