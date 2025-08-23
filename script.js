@@ -197,7 +197,7 @@ window.addEventListener('scroll', () => {
     
     // Add shadow on scroll
     if (currentScroll > 10) {
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        navbar.style.boxShadow = '0 2px 20px rgba(255, 140, 60, 0.15)';
         navbar.style.background = 'rgba(255, 255, 255, 0.95)';
     } else {
         navbar.style.boxShadow = 'none';
@@ -289,15 +289,6 @@ const sanskritFont = document.createElement('link');
 sanskritFont.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap';
 sanskritFont.rel = 'stylesheet';
 document.head.appendChild(sanskritFont);
-
-// Parallax Effect for Dot Pattern
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const dotPattern = document.querySelector('.dot-pattern');
-    if (dotPattern) {
-        dotPattern.style.transform = `translateY(${scrolled * 0.3}px)`;
-    }
-}, { passive: true });
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
