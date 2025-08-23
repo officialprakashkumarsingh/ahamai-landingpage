@@ -3,347 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>अहम्AI - Revolutionary AI Platform</title>
+    <title>अहम्AI - Download</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Warm Orange Glow Background -->
     <div class="background-glow"></div>
     
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-content">
-                <div class="logo">
-                    <span class="logo-text"><span class="sanskrit">अहम्</span>AI</span>
-                </div>
-                <div class="nav-menu">
-                    <a href="#preview" class="nav-link">Preview</a>
-                    <a href="#features" class="nav-link">Features</a>
-                    <a href="#download" class="nav-link">Download</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section - Fresh Design -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-wrapper">
-                <div class="hero-badge-wrapper">
-                    <div class="hero-badge">
-                        <span class="badge-icon">✨</span>
-                        <span>Free Forever</span>
-                    </div>
-                    <div class="india-badge">
-                        <span>🇮🇳 Made in India</span>
-                    </div>
-                </div>
-                
-                <h1 class="hero-title">
-                    <span class="title-line"><span class="sanskrit">अहम्</span>AI</span>
-                    <span class="title-accent">The Future is Here</span>
-                </h1>
-                
-                <p class="hero-description">
-                    30+ AI Models working simultaneously in perfect harmony
-                </p>
-                
-                <div class="hero-actions">
-                    <button class="btn-primary" id="downloadBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                        <span>Download App</span>
-                    </button>
-                    <div class="launch-timer">
-                        <span class="timer-label">Launching in</span>
-                        <span class="timer-value"><span id="hours">00</span>h <span id="minutes">00</span>m</span>
-                    </div>
-                </div>
-                
-                <div class="hero-features">
-                    <div class="hero-feature">
-                        <span class="feature-value">30+</span>
-                        <span class="feature-label">AI Models</span>
-                    </div>
-                    <div class="hero-feature">
-                        <span class="feature-value">∞</span>
-                        <span class="feature-label">Parallel Chats</span>
-                    </div>
-                    <div class="hero-feature">
-                        <span class="feature-value">100%</span>
-                        <span class="feature-label">Free</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Live Preview - New Design -->
-    <section class="preview" id="preview">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">LIVE DEMO</span>
-                <h2 class="section-title">Experience the Magic</h2>
+    <!-- Main Content -->
+    <div class="download-container">
+        <div class="content-wrapper">
+            <!-- Logo -->
+            <div class="logo-section">
+                <h1 class="logo-main"><span class="sanskrit">अहम्</span>AI</h1>
             </div>
             
-            <div class="preview-window">
-                <div class="window-header">
-                    <div class="window-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                    </div>
-                    <div class="window-tabs">
-                        <button class="tab active" data-preview="chat">Chat</button>
-                        <button class="tab" data-preview="create">Create</button>
-                        <button class="tab" data-preview="analyze">Analyze</button>
-                    </div>
-                </div>
+            <!-- Tagline -->
+            <p class="tagline">30+ AI Models. One App. Completely Free.</p>
+            
+            <!-- Download Section -->
+            <div class="download-section">
+                <button class="download-button" id="downloadBtn">
+                    <svg class="download-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    <span>Download for Android</span>
+                </button>
                 
-                <div class="window-content">
-                    <!-- Chat Preview -->
-                    <div class="preview-panel active" id="preview-chat">
-                        <div class="chat-container">
-                            <div class="message-user">
-                                <span>Explain quantum computing in simple terms</span>
-                            </div>
-                            <div class="ai-responses">
-                                <div class="message-ai">
-                                    <div class="ai-avatar">G4</div>
-                                    <div class="ai-content">
-                                        <span class="ai-model">GPT-4</span>
-                                        <p>Quantum computing uses quantum bits that can be both 0 and 1 simultaneously...</p>
-                                    </div>
-                                </div>
-                                <div class="message-ai">
-                                    <div class="ai-avatar">CL</div>
-                                    <div class="ai-content">
-                                        <span class="ai-model">Claude</span>
-                                        <p>Think of it like having a coin that's spinning in the air...</p>
-                                    </div>
-                                </div>
-                                <div class="message-ai">
-                                    <div class="ai-avatar">GM</div>
-                                    <div class="ai-content">
-                                        <span class="ai-model">Gemini</span>
-                                        <p>Quantum computers leverage superposition and entanglement...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Create Preview -->
-                    <div class="preview-panel" id="preview-create">
-                        <div class="create-container">
-                            <div class="create-input">
-                                <span class="input-label">Prompt</span>
-                                <p>A futuristic city with floating gardens</p>
-                            </div>
-                            <div class="create-output">
-                                <div class="image-grid">
-                                    <div class="image-item">
-                                        <div class="image-shimmer"></div>
-                                        <span class="image-model">DALL-E 3</span>
-                                    </div>
-                                    <div class="image-item">
-                                        <div class="image-shimmer"></div>
-                                        <span class="image-model">Midjourney</span>
-                                    </div>
-                                    <div class="image-item">
-                                        <div class="image-shimmer"></div>
-                                        <span class="image-model">Stable Diffusion</span>
-                                    </div>
-                                    <div class="image-item">
-                                        <div class="image-shimmer"></div>
-                                        <span class="image-model">Leonardo</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Analyze Preview - Redesigned -->
-                    <div class="preview-panel" id="preview-analyze">
-                        <div class="analyze-container">
-                            <div class="analyze-header">
-                                <span class="analyze-title">Real-time Analysis</span>
-                                <span class="analyze-status">Processing...</span>
-                            </div>
-                            <div class="analyze-grid">
-                                <div class="analyze-card">
-                                    <div class="analyze-icon">🎯</div>
-                                    <div class="analyze-info">
-                                        <span class="analyze-metric">Accuracy</span>
-                                        <span class="analyze-value">98.5%</span>
-                                    </div>
-                                    <div class="analyze-progress">
-                                        <div class="progress-bar" style="--progress: 98.5%"></div>
-                                    </div>
-                                </div>
-                                <div class="analyze-card">
-                                    <div class="analyze-icon">⚡</div>
-                                    <div class="analyze-info">
-                                        <span class="analyze-metric">Speed</span>
-                                        <span class="analyze-value">0.3s</span>
-                                    </div>
-                                    <div class="analyze-progress">
-                                        <div class="progress-bar" style="--progress: 95%"></div>
-                                    </div>
-                                </div>
-                                <div class="analyze-card">
-                                    <div class="analyze-icon">🔍</div>
-                                    <div class="analyze-info">
-                                        <span class="analyze-metric">Insights</span>
-                                        <span class="analyze-value">247</span>
-                                    </div>
-                                    <div class="analyze-progress">
-                                        <div class="progress-bar" style="--progress: 85%"></div>
-                                    </div>
-                                </div>
-                                <div class="analyze-card">
-                                    <div class="analyze-icon">📊</div>
-                                    <div class="analyze-info">
-                                        <span class="analyze-metric">Patterns</span>
-                                        <span class="analyze-value">12</span>
-                                    </div>
-                                    <div class="analyze-progress">
-                                        <div class="progress-bar" style="--progress: 75%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="analyze-visual">
-                                <div class="neural-network">
-                                    <div class="node node-1"></div>
-                                    <div class="node node-2"></div>
-                                    <div class="node node-3"></div>
-                                    <div class="node node-4"></div>
-                                    <div class="node node-5"></div>
-                                    <div class="connection"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="launch-info">
+                    <span class="launch-text">Launching in <span id="hours">00</span>h <span id="minutes">00</span>m</span>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features - Card Based -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">FEATURES</span>
-                <h2 class="section-title">Everything You Need</h2>
             </div>
             
-            <div class="features-grid">
-                <div class="feature-card large">
-                    <div class="feature-icon">🤖</div>
-                    <h3>Multi-Model Intelligence</h3>
-                    <p>Access GPT-4, Claude, Gemini, and 30+ more AI models simultaneously</p>
-                    <div class="feature-tags">
-                        <span class="tag">Parallel Processing</span>
-                        <span class="tag">Real-time</span>
-                    </div>
+            <!-- Key Features -->
+            <div class="features-minimal">
+                <div class="feature-item">
+                    <span class="feature-icon">✨</span>
+                    <span class="feature-text">Free Forever</span>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3>Creative Studio</h3>
-                    <p>Generate images, videos, and audio with multiple AI engines</p>
+                <div class="feature-item">
+                    <span class="feature-icon">🤖</span>
+                    <span class="feature-text">30+ AI Models</span>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📚</div>
-                    <h3>Smart Learning</h3>
-                    <p>Create flashcards, quizzes, and study materials instantly</p>
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <span class="feature-text">Parallel Processing</span>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h3>Web Intelligence</h3>
-                    <p>Real-time web search with AI-powered insights</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Data Analysis</h3>
-                    <p>Transform data into insights with advanced analytics</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Custom Workflows</h3>
-                    <p>Build your own AI workflows and automations</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Models Showcase - Floating Style -->
-    <section class="models">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">AI MODELS</span>
-                <h2 class="section-title">Powered by the Best</h2>
             </div>
             
-            <div class="models-cloud">
-                <div class="model-bubble large">OpenAI</div>
-                <div class="model-bubble">Anthropic</div>
-                <div class="model-bubble medium">Google</div>
-                <div class="model-bubble">Meta</div>
-                <div class="model-bubble small">Mistral</div>
-                <div class="model-bubble medium">DeepSeek</div>
-                <div class="model-bubble">Qwen</div>
-                <div class="model-bubble large">Stability</div>
-                <div class="model-bubble small">Cohere</div>
-                <div class="model-bubble">Replicate</div>
-                <div class="model-bubble medium">Hugging Face</div>
-                <div class="model-bubble">Together AI</div>
+            <!-- Made in India -->
+            <div class="footer-info">
+                <span class="made-in-india">🇮🇳 Made in India</span>
             </div>
         </div>
-    </section>
-
-    <!-- Download CTA -->
-    <section class="download-cta" id="download">
-        <div class="container">
-            <div class="cta-wrapper">
-                <div class="cta-content">
-                    <h2 class="cta-title">
-                        Ready to Experience
-                        <span class="cta-highlight">The Future?</span>
-                    </h2>
-                    <p class="cta-description">
-                        Join thousands of users revolutionizing their AI experience
-                    </p>
-                    <div class="cta-actions">
-                        <button class="btn-cta" id="ctaBtn">
-                            Get Early Access
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14"/>
-                                <path d="m12 5 7 7-7 7"/>
-                            </svg>
-                        </button>
-                        <span class="cta-note">No credit card required • Free forever</span>
-                    </div>
-                </div>
-                <div class="cta-visual">
-                    <div class="cta-badge">
-                        <span class="badge-text">Made with ❤️ in India</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Notification Container -->
     <div id="notification-container"></div>
