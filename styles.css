@@ -63,25 +63,28 @@ html, body {
     width: 100%;
 }
 
-/* Logo Section */
-.logo-section {
-    margin-bottom: 24px;
+/* Mobile Mockup */
+.mobile-mockup {
+    background: #111;
+    border: 8px solid #000;
+    border-radius: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    margin: 0 auto 32px;
+    padding: 15px;
+    max-width: 300px;
 }
 
-.logo-main {
-    font-size: 56px;
-    font-weight: 700;
-    letter-spacing: -2px;
-    background: linear-gradient(135deg, var(--primary), #FFA55C);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.mobile-mockup img {
+    width: 100%;
+    border-radius: 30px;
+    display: block;
 }
 
 /* Tagline */
 .tagline {
     font-size: 18px;
     color: var(--text-secondary);
-    margin-bottom: 48px;
+    margin-bottom: 32px;
     font-weight: 400;
 }
 
@@ -206,10 +209,6 @@ html, body {
 
 /* Mobile Responsive */
 @media (max-width: 480px) {
-    .logo-main {
-        font-size: 42px;
-    }
-    
     .tagline {
         font-size: 16px;
     }
