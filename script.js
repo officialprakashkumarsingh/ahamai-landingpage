@@ -1,34 +1,5 @@
 // Clean Minimalist JavaScript
 
-// Countdown Timer
-function updateCountdown() {
-    const launchDate = new Date();
-    launchDate.setHours(launchDate.getHours() + 3); // Launch in 3 hours
-    
-    const now = new Date();
-    const diff = launchDate - now;
-    
-    if (diff > 0) {
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        
-        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    } else {
-        document.querySelector('.launch-text').textContent = 'Available Now!';
-    }
-}
-
-// Update countdown every minute
-setInterval(updateCountdown, 60000);
-updateCountdown();
-
-// Download Button Handler
-document.getElementById('downloadBtn').addEventListener('click', (e) => {
-    e.preventDefault();
-    showNotification('अहम्AI launching soon • 100% Free Forever');
-});
-
 // Simple Notification System
 function showNotification(message) {
     const container = document.getElementById('notification-container');
